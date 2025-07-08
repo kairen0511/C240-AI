@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mental Health Assistant</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #d2e7f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    
+    /* Top Bar */
+    .top-bar {
+      background-color: #ffffff;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    .top-bar .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 30px;
+      height: 30px;
+      background-color: #96d1e6;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #0077b6;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    /* Page content padding for fixed top bar */
+    .page-content {
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .card {
+      background-color: #e7f3f9;
+      border-radius: 25px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .card p {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    .toggle-button {
+      margin-top: 20px;
+      background-color: #96d1e6;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 20px;
+      width: 90%;
+      font-size: 16px;
+      color: #fff;
+      font-weight: bold;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle-button::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      text-align: center;
+      max-width: 120px;
+    }
+
+    .feature-icon {
+      background-color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .feature-icon::before {
+      content: '💬';
+      font-size: 24px;
+    }
+
+    .feature:nth-child(2) .feature-icon::before {
+      content: '🧠';
+    }
+
+    .feature:nth-child(3) .feature-icon::before {
+      content: '🎮';
+    }
+
+    .feature:nth-child(4) .feature-icon::before {
+      content: '📄';
+    }
+
+    .feature p {
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="top-bar">
+    <div class="logo-section">
+      <div class="logo"></div>
+      <span class="title">MindMate</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">About Us</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Hi! How are you feeling?</h2>
+    <p>Is there anything I can do to help you with today?</p>
+    <section id="chatbot-section" style="margin-top:2.5rem;max-width:500px;margin-left:auto;margin-right:auto;background:#f9fafc;padding:1.5rem 1rem;border-radius:1.2rem;box-shadow:0 2px 12px #7f5af022;">
+      <div id="chat-messages" style="min-height:60px;margin-bottom:1rem;"></div>
+      <form id="chat-form" style="display:flex;gap:0.5rem;">
+        <input id="chat-input" type="text" placeholder="How May we help you today?..." style="flex:1;padding:0.5rem 1rem;border-radius:1rem;border:1px solid #e0e7ff;outline:none;" required />
+        <button type="submit" style="background:#7f5af0;color:#fff;border:none;border-radius:1rem;padding:0.5rem 1.2rem;font-weight:700;cursor:pointer;">Send</button>
+      </form>
+      <div id="chat-error" style="color:#ff3333;font-size:0.95rem;margin-top:0.5rem;"></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      // TODO: Replace YOUR_SPACE and YOUR_CHATFLOW_ID with your own values below
+      async function query(data) {
+        const response = await fetch(
+          "",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          }
+        );
+        const result = await response.json();
+        return result;
+      }
+      function renderMarkdown(md) {
+        // Use marked.js for full markdown support
+        if (window.marked) {
+          return window.marked.parse(md);
+        }
+        // fallback: basic markdown to HTML conversion
+        let html = md
+          .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // bold
+          .replace(/\*(.*?)\*/g, '<i>$1</i>') // italics
+          .replace(/`([^`]+)`/g, '<code>$1</code>') // inline code
+          .replace(/\n/g, '<br>'); // line breaks
+        // Table: convert markdown table to HTML table (basic)
+        if (/^\s*\|.*\|/m.test(md)) {
+          html = html.replace(/((?:^\s*\|.*\|\s*\n?)+)/gm, function(table) {
+            const rows = table.trim().split(/\n/).filter(Boolean);
+            if (rows.length < 2) return table; // not a table
+            const header = rows[0].replace(/\|/g, ' ').trim().split(/\s{2,}/);
+            const aligns = rows[1];
+            const bodyRows = rows.slice(2).map(r => r.replace(/\|/g, ' ').trim().split(/\s{2,}/));
+            let htmlTable = '<table class="chat-table"><thead><tr>';
+            header.forEach(h => htmlTable += `<th>${h}</th>`);
+            htmlTable += '</tr></thead><tbody>';
+            bodyRows.forEach(row => {
+              htmlTable += '<tr>';
+              row.forEach(cell => htmlTable += `<td>${cell}</td>`);
+              htmlTable += '</tr>';
+            });
+            htmlTable += '</tbody></table>';
+            return htmlTable;
+          });
+        }
+        return html;
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('chat-form');
+        const input = document.getElementById('chat-input');
+        const messages = document.getElementById('chat-messages');
+        const errorDiv = document.getElementById('chat-error');
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const userMsg = input.value.trim();
+          if (!userMsg) return;
+          messages.innerHTML += `<div class='chat-msg user'><b>You:</b> ${userMsg}</div>`;
+          input.value = '';
+          errorDiv.textContent = '';
+          try {
+            messages.innerHTML += `<div class='chat-msg bot' style='color:#888;'>BotLah is typing...</div>`;
+            const response = await query({"question": userMsg});
+            let botMsg = response.text || JSON.stringify(response);
+            messages.innerHTML = messages.innerHTML.replace('BotLah is typing...','');
+            messages.innerHTML += `<div class='chat-msg bot'><b>BotLah:</b> ${renderMarkdown(botMsg)}</div>`;
+            messages.scrollTop = messages.scrollHeight;
+          } catch (err) {
+            errorDiv.textContent = 'Sorry, there was a problem contacting BotLah.';
+          }
+        });
+      });
+    </script>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon"></div>
+      <p>Empathetic<br>Conversation</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"></div>
+      <p>Stress<br>Management</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"></div>
+      <p>Daily Mental-<br>Check-Ins</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"></div>
+      <p>Daily Resource<br>Check-Ins</p>
+    </div>
+  </div>
+
+</body>
+</html>
