@@ -15,7 +15,7 @@
       justify-content: center;
       min-height: 100vh;
     }
-    
+
     /* Top Bar */
     .top-bar {
       background-color: #ffffff;
@@ -23,7 +23,6 @@
       height: 60px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 0 30px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       position: fixed;
@@ -32,15 +31,15 @@
       z-index: 100;
     }
 
-    .top-bar .logo-section {
+    .logo-section {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .logo {
-      width: 30px;
-      height: 30px;
+      width: 50px;
+      height: 50px;
       background-color: #96d1e6;
       border-radius: 50%;
       display: inline-block;
@@ -52,22 +51,65 @@
       color: #333;
     }
 
+    .nav-links {
+      margin-left: 30px;
+    }
+
     .nav-links a {
       text-decoration: none;
       color: #0077b6;
       font-weight: 500;
       font-size: 14px;
     }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      background: none;
+      border: none;
+      color: #0077b6;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 120px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #0077b6;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
     /* Page content padding for fixed top bar */
     .page-content {
-      padding-top: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding-top: 100px;
+      text-align: center;
     }
-    
-    .card {
+
+    .greeting-card {
       background-color: #e7f3f9;
       border-radius: 25px;
       padding: 30px;
@@ -77,41 +119,18 @@
       margin-bottom: 40px;
     }
 
-    .card h2 {
+    .greeting-card h2 {
       margin-top: 0;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
+      color: #1e3a5f;
     }
 
-    .card p {
-      font-size: 14px;
-      margin: 10px 0;
-    }
-
-    .toggle-button {
-      margin-top: 20px;
-      background-color: #96d1e6;
-      border: none;
-      border-radius: 30px;
-      padding: 15px 20px;
-      width: 90%;
-      font-size: 16px;
-      color: #fff;
-      font-weight: bold;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .toggle-button::after {
-      content: '';
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: white;
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
+    .greeting-card p {
+      font-size: 15px;
+      color: #444;
+      margin-top: 10px;
+      line-height: 1.5;
     }
 
     .features {
@@ -160,37 +179,65 @@
       font-weight: bold;
       color: #333;
     }
-
   </style>
 </head>
 <body>
-  
+
   <div class="top-bar">
     <div class="logo-section">
-      <div class="logo"></div>
+      <img src="Images/MindMate_Logo.png" alt="MindMate Logo" class = "logo">
       <span class="title">MindMate</span>
     </div>
     <div class="nav-links">
-      <a href="#">About Us</a>
+      <a href="about_us_page.html">About Us</a>
+      <div class="dropdown">
+        <button class="dropdown-button">Settings ▾</button>
+        <div class="dropdown-content">
+          <a href="index.html">Log Out</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="card">
-    <h2>Hi! How are you feeling?</h2>
-    <p>Is there anything I can do to help you with today?</p>
-    <section id="chatbot-section" style="margin-top:2.5rem;max-width:500px;margin-left:auto;margin-right:auto;background:#f9fafc;padding:1.5rem 1rem;border-radius:1.2rem;box-shadow:0 2px 12px #7f5af022;">
-      <div id="chat-messages" style="min-height:60px;margin-bottom:1rem;"></div>
-      <form id="chat-form" style="display:flex;gap:0.5rem;">
-        <input id="chat-input" type="text" placeholder="How May we help you today?..." style="flex:1;padding:0.5rem 1rem;border-radius:1rem;border:1px solid #e0e7ff;outline:none;" required />
-        <button type="submit" style="background:#7f5af0;color:#fff;border:none;border-radius:1rem;padding:0.5rem 1.2rem;font-weight:700;cursor:pointer;">Send</button>
-      </form>
-      <div id="chat-error" style="color:#ff3333;font-size:0.95rem;margin-top:0.5rem;"></div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <div class="page-content">
+    <div class="greeting-card">
+      <h2>Welcome to MindMate 💙</h2>
+      <p>We're so glad you're here. Your journey toward better mental wellness starts now.</p>
+      <p>Tap the circle on the bottom right of the page to begin chatting with our friendly AI assistant. It’s always ready to listen and help.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"></div>
+        <p>Empathetic<br>Conversation</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"></div>
+        <p>Stress<br>Management</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"></div>
+        <p>Daily Mental-<br>Check-Ins</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"></div>
+        <p>Daily Resource<br>Check-Ins</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/07/08/04/20250708043023-KK3G3N0Q.js"></script>
+
+</body>
+</html>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
       // TODO: Replace YOUR_SPACE and YOUR_CHATFLOW_ID with your own values below
       async function query(data) {
         const response = await fetch(
-          "",
+          "https://YOUR_SPACE.hf.space/api/v1/prediction/YOUR_CHATFLOW_ID",
           {
             method: "POST",
             headers: {
@@ -259,27 +306,4 @@
           }
         });
       });
-    </script>
-  </div>
-
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon"></div>
-      <p>Empathetic<br>Conversation</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"></div>
-      <p>Stress<br>Management</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"></div>
-      <p>Daily Mental-<br>Check-Ins</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"></div>
-      <p>Daily Resource<br>Check-Ins</p>
-    </div>
-  </div>
-
-</body>
-</html>
+    </script> -->

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellie Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10%;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-left img {
+      height: 100px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .navbar-left h1 {
+      font-size: 1.5em;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .navbar-right a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #57bfa3;
+      font-weight: 600;
+    }
+    
+    body {
+      background: linear-gradient(to right, #b3dbe8 50%, #d6eae9 50%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 10%;
+    }
+
+    .login-box {
+      max-width: 400px;
+    }
+
+    .login-box h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .login-box p {
+      font-size: 0.95em;
+      color: #4b4b4b;
+      margin-bottom: 30px;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #57bfa3;
+      border: none;
+      color: white;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .robot-section {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .robot-section img {
+      width: 250px;
+      margin-bottom: 20px;
+    }
+
+    .robot-section h3 {
+      font-size: 1.5em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .robot-section p {
+      font-size: 0.9em;
+      color: #4b4b4b;
+      margin-bottom: 10px;
+    }
+
+    .features {
+      background: #f4f8f9;
+      padding: 30px 10%;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .feature {
+      width: 22%;
+    }
+
+    .feature img {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+
+    .feature h4 {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .feature p {
+      font-size: 0.85em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="Images/MindMate_Logo.png" alt="MindMate Logo">
+      <h1>MindMate</h1>
+    </div>
+    <div class="navbar-right">
+      <a href="about_us_visitor_page.html">About Us</a>
+      <a href="#signup">Sign Up</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <p>Clean minimalistic chatting on our page.</p>
+      <form>
+        <input type="text" placeholder="Username" required />
+        <input type="password" placeholder="Password" required />
+        <input type="password" placeholder="Confirm Password" required />
+        <a href="home_page.html" class="button">Login</a>
+      </form>
+      <p style="margin-top: 10px; font-size: 0.8em; color: #888">Client to mental table and their wellbeing</p>
+    </div>
+    <div class="robot-section">
+      <img src="images/mental_health_robot.jpg" alt="Cute Robot" /> <!-- Placeholder robot image -->
+      <h3>Empathic conversation for Tips Mental Health and WELLIE</h3>
+      <p>Canvasing Conversations and wellbeing Chatbot across anonymous smart tips session + care resources and day check-ins.</p>
+      <p>Uplifting conversations that promote health, aided engagement for sustainable wellbeing improvements. Your health, your future.</p>
+      <p><strong>Stress Management Check-ins:</strong> Daily gym management health posts, obstacles and recommendations.</p>
+      <p><strong>Stress Digital//Health Tools:</strong> Care care for stresses with reminders and resources paths.</p>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <img src="https://img.icons8.com/ios/50/empathy.png" alt="Empathy Icon"/>
+      <h4>Empathy</h4>
+      <p>For clean, eternal, empathetic tools</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/ios/50/user-male-circle.png" alt="Mental Health Icon"/>
+      <h4>Mental In</h4>
+      <p>Check-in with mental wellbeing</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/ios/50/leaf.png" alt="Check-In Icon"/>
+      <h4>Check-In</h4>
+      <p>Monitor mood & stress daily</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/ios/50/robot.png" alt="Resources Icon"/>
+      <h4>Resources</h4>
+      <p>Care and support tools</p>
+    </div>
+  </div>
+</body>
+</html>
