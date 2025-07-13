@@ -14,13 +14,13 @@
     }
 
     .button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  text-decoration: none;
-  border-radius: 5px;
-}
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      text-decoration: none;
+      border-radius: 5px;
+    }
 
     .navbar {
       display: flex;
@@ -54,7 +54,7 @@
       color: #57bfa3;
       font-weight: 600;
     }
-    
+
     body {
       background: linear-gradient(to right, #b3dbe8 50%, #d6eae9 50%);
       min-height: 100vh;
@@ -159,7 +159,7 @@
 <body>
   <div class="navbar">
     <div class="navbar-left">
-      <img src="MindMate_Logo.png" alt="MindMate Logo">
+      <img src="Images/MindMate_Logo.png" alt="MindMate Logo">
       <h1>MindMate</h1>
     </div>
     <div class="navbar-right">
@@ -167,6 +167,7 @@
       <a href="#signup">Sign Up</a>
     </div>
   </div>
+
   <div class="container">
     <div class="login-box">
       <h2>Login</h2>
@@ -179,8 +180,9 @@
       </form>
       <p style="margin-top: 10px; font-size: 0.8em; color: #888">Client to mental table and their wellbeing</p>
     </div>
+
     <div class="robot-section">
-      <img src="mental_health_robot.jpg" alt="Cute Robot" /> <!-- Placeholder robot image -->
+      <img src="images/mental_health_robot.jpg" alt="Cute Robot" />
       <h3>Empathic conversation for Tips Mental Health and WELLIE</h3>
       <p>Canvasing Conversations and wellbeing Chatbot across anonymous smart tips session + care resources and day check-ins.</p>
       <p>Uplifting conversations that promote health, aided engagement for sustainable wellbeing improvements. Your health, your future.</p>
@@ -211,5 +213,46 @@
       <p>Care and support tools</p>
     </div>
   </div>
+  
+  <!-- Botpress Chat Widget -->
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script>
+    window.botpressWebChat.init({
+      host: 'https://cdn.botpress.cloud/webchat/v1',
+      botId: 'a2731d0d-57c1-4342-960a-aeaa8c100f9a',
+      showCloseButton: true,
+      enableReset: true,
+      stylesheet: 'https://cdn.botpress.cloud/webchat/v1/themes/default.css',
+      onReceive: function (message) {
+        if (message.type === 'text' && message.payload && message.payload.text) {
+          setTimeout(() => {
+            const chatBubbles = document.querySelectorAll('.bpw-message.bpw-from-bot .bpw-message-content:last-child');
+            const lastBubble = chatBubbles[chatBubbles.length - 1];
+
+            if (lastBubble && !lastBubble.querySelector('.read-aloud-button')) {
+              const readButton = document.createElement('button');
+              readButton.innerText = '🔊 Read Aloud';
+              readButton.className = 'read-aloud-button';
+              readButton.style.marginLeft = '10px';
+              readButton.style.padding = '4px 8px';
+              readButton.style.fontSize = '12px';
+              readButton.style.borderRadius = '6px';
+              readButton.style.border = 'none';
+              readButton.style.background = '#57bfa3';
+              readButton.style.color = '#fff';
+              readButton.style.cursor = 'pointer';
+
+              readButton.onclick = () => {
+                const utterance = new SpeechSynthesisUtterance(message.payload.text);
+                speechSynthesis.speak(utterance);
+              };
+
+              lastBubble.appendChild(readButton);
+            }
+          }, 500);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
